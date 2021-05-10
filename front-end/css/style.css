@@ -1,8 +1,64 @@
-html, body {
-  background-color: red;
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orelega+One&display=swap");
+body {
+  margin: 0;
+}
+
+header {
   display: flex;
-  justify-content: flex-start;
-  font-size: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f3e9f0;
+  padding: 0 10px 0 10px;
+}
+header a {
+  width: 25%;
+}
+header a .logo {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+header nav a {
+  text-decoration-line: none;
+  color: black;
+  font-family: "Orelega One", sans-serif;
+  font-size: 1.5em;
+}
+
+.container {
+  background-color: #f3e9f0;
+}
+.container #articles {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding-bottom: 40px;
+}
+.container #articles #mainArticle {
+  width: 35%;
+  text-decoration-line: none;
+  color: black;
+}
+.container #articles .article {
+  border: none;
+  border-radius: 30px;
+  padding: 10px;
+  margin-top: 40px;
+  font-family: "Raleway", sans-serif;
+  background-color: #f3e9f0;
+  text-align: center;
+}
+.container #articles .article p {
+  font-size: 1.3em;
+}
+.container #articles .article #price {
+  font-weight: bold;
+}
+.container #articles .article img {
+  border-radius: 20px;
+  width: 100%;
+  object-fit: cover;
 }
 
 /*# sourceMappingURL=style.css.map */

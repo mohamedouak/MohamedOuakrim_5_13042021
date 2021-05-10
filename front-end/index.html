@@ -6,9 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css"/>
     <script src="./js/index.js" defer></script>
-    <title>Document</title>
+    <title>Accueil - Orinoco</title>
 </head>
 <body>
-    
+    <header>
+        <a href="index.html"><img class="logo" src="https://user.oc-static.com/upload/2019/09/04/15675819263013_image1.png" alt="logo Orinoco"></a>
+        <nav>
+            <a href="panier.html">Panier</a>
+        </nav>
+    </header>
+    <main class="container">
+        <section id="articles">
+            <template id="templateArticle">
+                <a href="produit.html" id="mainArticle">
+                    <div class="article">
+                        <img id="image" src="" alt="">
+                        <h2 id="name"></h2>
+                        <p id="price"></p>                        
+                        <p id="description"></p>
+                    </div>
+                </a>          
+            </template>
+        </section>
+        
+    </main>
 </body>
 </html>

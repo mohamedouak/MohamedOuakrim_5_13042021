@@ -1,0 +1,60 @@
+body{
+    margin: 0;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f3e9f0;
+    padding: 0 10px 0 10px;
+    a{
+        width: 25%;
+        .logo{
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    }
+    nav{
+        a{
+            text-decoration-line: none;
+            color: black;
+            font-family: 'Orelega One', sans-serif;
+            font-size: 1.5em;
+        }
+    }
+}
+.container{
+    background-color: #f3e9f0;
+    #articles{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding-bottom: 40px;
+        #mainArticle{
+            width: 35%;
+            text-decoration-line: none;
+            color: black;
+        }
+       .article{
+           border: none;
+           border-radius: 30px;
+           padding: 10px;
+           margin-top: 40px;
+           font-family: 'Raleway', sans-serif;
+           background-color: #f3e9f0;
+           text-align: center;
+           p{
+               font-size: 1.3em;
+           }
+           #price{
+               font-weight: bold;
+           }
+           img{
+               border-radius: 20px;
+               width: 100%;
+               object-fit: cover;
+           }
+       } 
+    }
+}

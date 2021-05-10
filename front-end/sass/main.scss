@@ -1,8 +1,6 @@
-$rouge :red;
-
-html, body{
-    background-color: $rouge;
-    display: flex;
-    justify-content: flex-start;
-    font-size: 1rem;
-}
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orelega+One&display=swap');
+@import "index";
+@import "produit";
+@import "panier";
+@import "confirmation";
