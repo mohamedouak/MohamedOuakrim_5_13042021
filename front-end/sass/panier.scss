@@ -1,0 +1,74 @@
+#titre_panier{
+    font-family: 'Orelega One', sans-serif;
+    text-align: center;
+}
+#panier{
+    width: 80%;
+    margin: auto;
+    padding-top: 40px;
+    font-family: 'Raleway', sans-serif;
+    h1{
+        font-family: 'Orelega One', sans-serif;
+    }
+    .panier-vide{
+        font-family: 'Orelega One', sans-serif;
+        display: flex;
+        justify-content: center;
+        font-size: 2em;
+        font-weight: bold;
+        padding: 80px;
+    }
+    #tableau{
+        width: 100%;
+        background-color: #f3e9f0;
+        th{
+            width: 20%;
+        }
+    }
+    #table{
+        width: 100%;
+        tr{
+            background-color: #f3e9f0;
+            .btn-delete{
+                padding: 5px;
+                cursor: pointer;
+                border: none;
+            }
+        }
+        #valeurs{
+            td{
+                width: 20%;
+                text-align: center;
+                background-color: #f3e9f0;
+                font-size: 1.3em;
+                input{
+                    width: 50px;
+                    height: 30px;
+                    padding: 5px;
+                }
+            }
+        }
+    }
+    .prix_total{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f3e9f0;
+        #text_total{
+            width: 25%;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+        }
+        #total{
+            width: 25%;
+            text-align: center;
+            font-size: 1.3em;
+            margin: 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+    }
+}

@@ -3,6 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css"/>
+    <script src="https://kit.fontawesome.com/5da6fe0c36.js" crossorigin="anonymous"></script>
     <script src="./js/produit.js" defer></script>
     <title>Produit</title>
 </head>
@@ -15,25 +16,31 @@
     </header>
     <section id="article">
         <template id="templateProduit">
-            <div>
+            <div class="image">
                 <img id="image_produit" src="" alt=""/>
             </div>
-            <h1 id="name_produit"></h1>
-            <div>
-                <p id="description_produit"></p>
-                <P id="price_produit"></P>
-            </div>
-            <form>
-                <label for="option_produit"></label>
-                <select name="option_produit" id="option_produit">
-                    <option id="option_1" value="option_1"></option>
-                    <option id="option_2" value="option_2"></option>
-                    <option id="option_3" value="option_3"></option>
-                </select>
-            </form>
-            <button id="btn_ajouter" type="button">Ajouter dans le panier</button>
-        </template>            
-        
+            <div class="description">
+                <h1 id="name_produit"></h1>
+                <div>
+                    <p id="description_produit"></p>
+                    <P id="price_produit"></P>
+                </div>
+                <form>
+                    <label for="option_produit">Séléctionner une option : </label>
+                    <select name="option_produit" id="option_produit">
+                    </select>
+                </form>
+                <button id="btn_add" type="button">Ajouter dans le panier</button>
+            </div>    
+        </template>       
     </section>
+    <footer>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="panier.html">Panier</a></li>
+        </ul>
+        <i class="far fa-copyright">Tous droits réservés</i>  
+    </footer>
 </body>
 </html>

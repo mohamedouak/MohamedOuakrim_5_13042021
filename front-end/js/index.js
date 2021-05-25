@@ -15,7 +15,7 @@ function recuperationArticles() {
 recuperationArticles()
     .then((articles) => {
        
-        //On fait une boucle pour pouvoir afficher chaque article
+        //On fait une boucle pour pouvoir afficher chaque article qui sont stockés dans la variable articles
         for (article of articles){
                 document.getElementById('templateArticle');
                 cloneElt = document.importNode(templateArticle.content, true);
