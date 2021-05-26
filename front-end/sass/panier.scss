@@ -1,3 +1,5 @@
+//****************Panier****************
+
 #titre_panier{
     font-family: 'Orelega One', sans-serif;
     text-align: center;
@@ -7,25 +9,11 @@
     margin: auto;
     padding-top: 40px;
     font-family: 'Raleway', sans-serif;
+    
     h1{
         font-family: 'Orelega One', sans-serif;
     }
-    .panier-vide{
-        font-family: 'Orelega One', sans-serif;
-        display: flex;
-        justify-content: center;
-        font-size: 2em;
-        font-weight: bold;
-        padding: 80px;
-    }
     #tableau{
-        width: 100%;
-        background-color: #f3e9f0;
-        th{
-            width: 20%;
-        }
-    }
-    #table{
         width: 100%;
         tr{
             background-color: #f3e9f0;
@@ -57,18 +45,45 @@
         background-color: #f3e9f0;
         #text_total{
             width: 25%;
-            font-size: 1.3em;
-            font-weight: bold;
-            text-align: center;
         }
         #total{
             width: 25%;
-            text-align: center;
-            font-size: 1.3em;
-            margin: 0;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            font-weight: bold;
+        }
+    }
+}
+.panier-vide{
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 80px;
+}
+
+//**************Formulaire de validation*************
+
+#formulaire{
+    width: 80%;
+    margin: auto;
+    font-family: 'Raleway', sans-serif;
+    background-color: #f3e9f0;
+    h2{
+        text-align: center;
+    }
+    form{
+        width: 50%;
+        margin: auto;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        align-items: center;
+        input{
+            width: 50%;
+            margin: 10px 0 10px 0;
+        }
+        label{
+            width: 50%;
+        }
+        textarea{
+            width: 50%;
         }
     }
 }

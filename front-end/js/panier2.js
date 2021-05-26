@@ -28,7 +28,7 @@ const panierVide = `
     `;
     for(i = 0; i < saveProduit.length; i++ ){
         produitPanier = produitPanier + `
-        <table id="table">            
+        <table id="tableau">            
             <tr id="valeurs">
                 <td id="produit">${saveProduit[i].name}</td>
                 <td id="Option">${saveProduit[i].option_produit}</td>
@@ -77,10 +77,11 @@ function affichagePrixTotal(){
 affichagePrixTotal();
 
 function supprimerProduit(){
-        //Séléction des références de tous les btn-delete
+    //Séléction des références de tous les btn-delete
     let btn = document.querySelectorAll('.btn-delete')
     console.log(btn);
 
+    //On fait une boucle for pour chaque élément du panier à supprimer
     for(let i = 0; i < saveProduit.length; i++){
         btn[i].addEventListener('click', (event) => {
             event.preventDefault();

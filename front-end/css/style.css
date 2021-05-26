@@ -170,39 +170,24 @@ footer i {
 #panier h1 {
   font-family: "Orelega One", sans-serif;
 }
-#panier .panier-vide {
-  font-family: "Orelega One", sans-serif;
-  display: flex;
-  justify-content: center;
-  font-size: 2em;
-  font-weight: bold;
-  padding: 80px;
-}
 #panier #tableau {
   width: 100%;
+}
+#panier #tableau tr {
   background-color: #f3e9f0;
 }
-#panier #tableau th {
-  width: 20%;
-}
-#panier #table {
-  width: 100%;
-}
-#panier #table tr {
-  background-color: #f3e9f0;
-}
-#panier #table tr .btn-delete {
+#panier #tableau tr .btn-delete {
   padding: 5px;
   cursor: pointer;
   border: none;
 }
-#panier #table #valeurs td {
+#panier #tableau #valeurs td {
   width: 20%;
   text-align: center;
   background-color: #f3e9f0;
   font-size: 1.3em;
 }
-#panier #table #valeurs td input {
+#panier #tableau #valeurs td input {
   width: 50px;
   height: 30px;
   padding: 5px;
@@ -216,18 +201,44 @@ footer i {
 }
 #panier .prix_total #text_total {
   width: 25%;
-  font-size: 1.3em;
-  font-weight: bold;
-  text-align: center;
 }
 #panier .prix_total #total {
   width: 25%;
+}
+
+.panier-vide {
   text-align: center;
-  font-size: 1.3em;
-  margin: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  font-size: 2em;
   font-weight: bold;
+  padding: 80px;
+}
+
+#formulaire {
+  width: 80%;
+  margin: auto;
+  font-family: "Raleway", sans-serif;
+  background-color: #f3e9f0;
+}
+#formulaire h2 {
+  text-align: center;
+}
+#formulaire form {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+#formulaire form input {
+  width: 50%;
+  margin: 10px 0 10px 0;
+}
+#formulaire form label {
+  width: 50%;
+}
+#formulaire form textarea {
+  width: 50%;
 }
 
 /*# sourceMappingURL=style.css.map */

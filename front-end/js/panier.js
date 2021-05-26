@@ -55,52 +55,57 @@ function affichagePrixTotal(){
             <div id="total">${calculPrix},00 €</div>
         </div>               
     `
-    //Injection HTML dans la section panier après le dernier enfant
-    panier.insertAdjacentHTML('beforeend', affichagePrix);
+    if(saveProduit.length !== 0)
+        panier.insertAdjacentHTML('beforeend', affichagePrix);
+        console.log(saveProduit);
 }
 
 affichagePrixTotal();
 
-//Séléction des références de tous les btn-delete
-let btn = document.querySelectorAll('.btn-delete')
+function supprimerProduit(){
+    //Séléction des références de tous les btn-delete
+    let btn = document.querySelectorAll('.btn-delete')
     console.log(btn);
 
-for(let i = 0; i < saveProduit.length; i++){
-    btn[i].addEventListener('click', (event) => {
-        event.preventDefault();
+    //On fait une boucle for pour chaque élément du panier à supprimer
+    for(let i = 0; i < saveProduit.length; i++){
+        btn[i].addEventListener('click', (event) => {
+            event.preventDefault();
 
-        //Séléction de l'id du produit qui va être supprimé en cliquant sur le bouton
-        let id_supprimer = saveProduit[i]._id;
-        console.log(id_supprimer);
+            //Séléction de l'id du produit qui va être supprimé en cliquant sur le bouton
+            let id_supprimer = saveProduit[i]._id;
+            console.log('id suppr', id_supprimer);
 
-        //Avec la méthode filter je séléctionne les éléments à garder et je supprime l'élément où le btn-delete a été cliqué
-        let newPanier = saveProduit.filter(el => el._id !== id_supprimer);
-            console.log(newPanier);
+            //Avec la méthode filter je séléctionne les éléments à garder et je supprime l'élément où le btn-delete a été cliqué
+            saveProduit = saveProduit.filter( el => el._id !== id_supprimer);
+                console.log('saveprod', saveProduit);
 
-        //On envoie la variable dans le localStorage
-        localStorage.setItem(
-            'produit', JSON.stringify(newPanier)
-            );
+            //On envoie la variable dans le localStorage
+            localStorage.setItem(
+                'produit', JSON.stringify(saveProduit)
+                );
+            // alert('Ce produit a été supprimé du panier')
+            window.location.href = 'panier.html';
+        })
         
-            window.location.reload();
-    })
+    }
 }
+supprimerProduit();
 
-// //Séléction du bouton supprimer
-// let btn_delete = document.getElementById('btn-delete');
 
-// for(let i = 0; i < saveProduit.length; i++){
-//     btn_delete.setAttribute('data-id', saveProduit[i]._id);
-//     let monId = btn_delete.getAttribute('data-id');    
-// };
-// //On écoute le bouton et supprimer l'article
-// btn_delete.addEventListener('click', (event) => {
-//     event.preventDefault();
-//     console.log(event);
 
-//     let monId = btn_delete.getAttribute('data-id');
-//     saveProduit.splice(saveProduit.indexOf(monId), 0);
-//     console.log(saveProduit);
-//     console.log(monId);    
-// });
+//------------------Formulaire de validation-------------------
 
+document.querySelector('.form button').addEventListener('click', function(){
+    for (let input of document.querySelectorAll('.form input,.form textarea')) {
+        var valid = true;
+        valid &= input.reportValidity();
+        if(!valid){
+            break;
+        }
+    }
+    if(valid){
+        alert('Votre formulaire est bien rempli');
+    }
+
+});

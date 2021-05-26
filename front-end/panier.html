@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css"/>
     <script src="https://kit.fontawesome.com/5da6fe0c36.js" crossorigin="anonymous"></script>
-    <script src="./js/panier2.js" defer></script>
+    <script src="./js/panier.js" defer></script>
     <title>Panier</title>
 </head>
 <body>
@@ -15,8 +15,10 @@
         </nav>
     </header>
     <h1 id="titre_panier">Récapitulatif de votre commande</h1>
-    <section id="panier">
-        <!-- <table id="tableau">
+
+    <!-- Panier -->
+    <section id="panier" class="panier-vide">
+        <table id="tableau">
             <tr id="en-tete">
                 <th>Produit</th>
                 <th>Option</th>
@@ -28,12 +30,40 @@
                 <tr id="valeurs">
                     <td id="produit"></td>
                     <td id="Option"></td>
-                    <td id="quantite">1</td>
+                    <td id="quantite"><input type="number" value="1" min="1" max="10"></td>
                     <td id="prix"></td>
                     <td><button class="btn-delete" data-id=""><i class="fas fa-trash-alt"></i></button></td>                    
                 </tr>
             </template>
-        </table>         -->
+        </table>        
+    </section>
+
+    <!-- Formulaire de contact -->
+    <section id="formulaire">
+        <h2 class="validation">Valider votre commande</h2>
+
+        <form class="form" action="#">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" pattern="[a-zA-Z]{0-10}" required>
+
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" pattern="[a-zA-Z]{0-10}" required>
+
+            <label for="adresse">Adresse</label>
+            <textarea id="adresse" name="adresse" required></textarea>
+
+            <label for="codePostal">Code postal</label>
+            <input type="text" id="codePostal" name="codePostal" pattern="[0-9]{5}" required>
+
+            <label for="ville">Ville</label>
+            <input type="text" id="ville" name="ville" pattern="[a-zA-Z]{0-10}" required>
+
+            <label for="email">Adresse e-mail</label>
+            <input type="text" id="email" name="email" pattern="[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" required>
+
+            <button id="envoyerFormulaire" type="submit" name="envoyerFormulaire">Procéder au paiement</button>
+
+        </form>
     </section>
 
 </body>
