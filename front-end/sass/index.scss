@@ -42,7 +42,7 @@ header{
            padding: 10px;
            margin-top: 40px;
            font-family: 'Raleway', sans-serif;
-           background-color: #f3e9f0;
+           background-color: white;
            text-align: center;
            p{
                font-size: 1.3em;
@@ -64,16 +64,30 @@ header{
 }
 footer{
     background-color: #f3e9f0;
-    padding: 80px 40px 10px 40px;
+    padding: 50px 10px 100px 10px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    ul{
+        width: 60%;
+        display: flex;
+        justify-content: space-between;
+        li{
+            list-style-type: none;
+            a{
+                text-decoration-line: none;
+                font-size: 1.3em;
+                font-family: 'Raleway', sans-serif;
+                color: black;
+                &:hover{
+                    color: palevioletred;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
     i{
         font-size: 1em;
         padding-right: 5px;
-    }
-    p{
-        font-size: 1em;
-        margin: 0;
     }
 }

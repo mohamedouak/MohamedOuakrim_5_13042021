@@ -94,10 +94,10 @@ recuperationArticle()
             console.log(userChoice);
 
             // 1. Vérifier si l'id du produit n'existe pas deja dans mon panier
-            // panier.find( (produit) => produit.id === nouveau_produit.id ) si elle renvoie qqch -> le produit existe dans mon panier
+            // panier.find( (produit) => produit._id === nouveau_produit._id ) si elle renvoie qqch -> le produit existe dans mon panier
             // si il n'existe pas -> ajouter normal
             // si il existe -> quantite = quantité + 1
-
+            
             //Récupération des valeurs du produit
             let valeurProduit = {
                 lenses: article.lenses,
@@ -106,7 +106,7 @@ recuperationArticle()
                 option_produit: userChoice,
                 imageUrl: article.imageUrl,
                 price: article.price / 100 + ',00' + '€' ,
-                quantite: 1        
+                quantite: 1      
             }
             console.log(valeurProduit);
             

@@ -46,7 +46,7 @@ header nav a {
   padding: 10px;
   margin-top: 40px;
   font-family: "Raleway", sans-serif;
-  background-color: #f3e9f0;
+  background-color: white;
   text-align: center;
 }
 .container #articles .article p {
@@ -67,18 +67,32 @@ header nav a {
 
 footer {
   background-color: #f3e9f0;
-  padding: 80px 40px 10px 40px;
+  padding: 50px 10px 100px 10px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+}
+footer ul {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+footer ul li {
+  list-style-type: none;
+}
+footer ul li a {
+  text-decoration-line: none;
+  font-size: 1.3em;
+  font-family: "Raleway", sans-serif;
+  color: black;
+}
+footer ul li a:hover {
+  color: palevioletred;
+  font-weight: bold;
 }
 footer i {
   font-size: 1em;
   padding-right: 5px;
-}
-footer p {
-  font-size: 1em;
-  margin: 0;
 }
 
 body {
@@ -109,6 +123,12 @@ body {
 }
 #article .description #price_produit {
   font-weight: bold;
+}
+#article .description input {
+  width: 50px;
+  height: 30px;
+  padding: 5px;
+  margin-top: 20px;
 }
 #article .description #btn_add {
   cursor: pointer;
@@ -186,11 +206,6 @@ footer i {
   text-align: center;
   background-color: #f3e9f0;
   font-size: 1.3em;
-}
-#panier #tableau #valeurs td input {
-  width: 50px;
-  height: 30px;
-  padding: 5px;
 }
 #panier .prix_total {
   width: 100%;
