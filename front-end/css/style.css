@@ -142,9 +142,6 @@ body {
   border: none;
   margin-top: 30px;
 }
-#article .description #btn_add:active {
-  border: 2px solid black;
-}
 
 footer {
   background-color: #f3e9f0;

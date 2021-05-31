@@ -101,11 +101,11 @@ recuperationArticle()
             //Récupération des valeurs du produit
             let valeurProduit = {
                 lenses: article.lenses,
-                _id: Math.floor(Math.random() * 9999) + '_' + article._id, // nombre entier aléatoire entre 1 et 9999
+                _id: article._id, 
                 name: article.name,
                 option_produit: userChoice,
                 imageUrl: article.imageUrl,
-                price: article.price / 100 + ',00' + '€' ,
+                price: article.price,
                 quantite: 1      
             }
             console.log(valeurProduit);
