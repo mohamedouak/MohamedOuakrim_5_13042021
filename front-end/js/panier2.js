@@ -105,3 +105,75 @@ function supprimerProduit(){
     }
 }
 supprimerProduit();
+
+//------------------Formulaire de validation-------------------
+
+function validationFormulaire() {
+
+    document.querySelector('.form button').addEventListener('click', function(){
+    for (let input of document.querySelectorAll('.form input,.form textarea')) {
+        var valid = true;
+        valid &= input.reportValidity();
+        if(!valid){
+            break;            
+        }
+    }
+    
+    // Récupération des données du formulaire à envoyer
+    let firstName = document.querySelector('#prenom').value
+    let lastName = document.querySelector('#nom').value
+    let address = document.querySelector('#adresse').value
+    let city = document.querySelector('#ville').value
+    let email = document.querySelector('#email').value
+    // 1 --- OBJET CONTACT CONTENANT INFORMATIONS DU FORMULAIRE, AVEC LA NOMENCLATURE SUIVANTE (ATTENTION A BIEN RESPECTER CETTE NOMENCLATURE)
+
+    // Création d'un objet où l'on va stocker les champs requis à envoyer
+    let contact = 
+    {
+        'firstName': firstName,
+        'lastName': lastName,
+        'address': address,
+        'city': city,
+        'email': email,
+    }
+    console.log(contact);
+    // 2 --- ARRAY (TABLEAU) PRODUCTS CONTENANT LES IDENTIFIANTS DE CHAQUE PRODUIT QUE VOUS AVEZ DANS LE PANIER
+
+    // Récupération des éléments du localStorage
+    let produitPanier = localStorage.getItem('produit');
+    let monPanier = JSON.parse(produitPanier);
+
+    // Création d'un tableau dans lequel on va stocker tous les id récupérés dans le panier
+    let products = []
+
+    for (let i = 0; i < monPanier.length; i++){
+        // Variable dans laquelle on va récupérer les id du panier pour ensuite les intégrer dans le tableau
+        let listId = monPanier[i]
+        products.push(listId._id)
+    }
+    console.log(products);
+
+    // 3 --- ENVOYER L'OBJET CONTACT && L'ARRAY PRODUCTS DANS LE BODY DE LA REQUETE POST
+
+    // Objet dans lequel on stocke les éléments à envoyer au serveur
+    let body = {contact, products}
+    console.log(body);
+
+    //Envoi de l'objet au serveur
+    function requetePost(){
+
+        let envoi = fetch ('http://localhost:3000/api/cameras/order', {
+            method: 'POST',
+            body: JSON.stringify (body),
+            headers: {
+                'content-Type': 'application/json'
+            },
+
+        })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+    }
+        
+    requetePost();
+});
+}

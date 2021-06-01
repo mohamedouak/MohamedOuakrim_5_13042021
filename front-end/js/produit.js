@@ -23,7 +23,7 @@ recuperationArticle()
         
         // Affichage
         affichageProduit(article);
-
+        
         // bouton ajouter au panier                
         ajoutPanier(article);
         
@@ -80,7 +80,7 @@ recuperationArticle()
 
         //Séléction de l'id du produit
         const idSelect = document.getElementById('option_produit');        
-
+        
         //Séléction du bouton
         let selectButton = document.getElementById('btn_add');
         console.log(selectButton);
@@ -92,7 +92,7 @@ recuperationArticle()
             //Choix de l'utilisateur dans une variable
             let userChoice = idSelect.value;
             console.log(userChoice);
-
+            
             // 1. Vérifier si l'id du produit n'existe pas deja dans mon panier
             // panier.find( (produit) => produit._id === nouveau_produit._id ) si elle renvoie qqch -> le produit existe dans mon panier
             // si il n'existe pas -> ajouter normal
@@ -112,6 +112,7 @@ recuperationArticle()
             
             // Variable dans laquelle sont stockées la value et la key qui sont dans le localstorage 
             let saveProduit = JSON.parse(localStorage.getItem('produit'));
+            console.log(saveProduit);
             
             //Fonction ajout produit séléctionné dans le localStorage
             function ajoutProduitLocalStorage () {
@@ -128,7 +129,7 @@ recuperationArticle()
                 ajoutProduitLocalStorage();
 
                 console.log(saveProduit);
-            } 
+            }
         });
     }
 
