@@ -101,7 +101,8 @@ recuperationArticle()
             //Récupération des valeurs du produit
             let valeurProduit = {
                 lenses: article.lenses,
-                _id: article._id, 
+                _id: article._id,
+                idDelete: Math.floor(Math.random() * 9999) + '_' + article._id,
                 name: article.name,
                 option_produit: userChoice,
                 imageUrl: article.imageUrl,

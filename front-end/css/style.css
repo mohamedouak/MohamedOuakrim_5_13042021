@@ -252,5 +252,14 @@ footer i {
 #formulaire form textarea {
   width: 50%;
 }
+#formulaire form button {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: gray;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  margin: 20px 0 20px 0;
+}
 
 /*# sourceMappingURL=style.css.map */

@@ -10,10 +10,11 @@ affichagePanier();
 affichagePrixTotal();
 supprimerProduit();
 validationFormulaire();
+
 // if (validationFormulaire()) {
 //     requetePost()
-// } else {
-//     // affichage alert error
+// }else {
+//     alert ('Veuillez bien saisir le formulaire')
 // }
 
 
@@ -84,11 +85,11 @@ function supprimerProduit(){
             event.preventDefault();
 
             //Séléction de l'id du produit qui va être supprimé en cliquant sur le bouton
-            let id_supprimer = saveProduit[i]._id;
+            let id_supprimer = saveProduit[i].idDelete;
             console.log(id_supprimer);
 
             //Avec la méthode filter je séléctionne les éléments à garder et je supprime l'élément où le btn-delete a été cliqué
-            saveProduit = saveProduit.filter( el => el._id !== id_supprimer);
+            saveProduit = saveProduit.filter( el => el.idDelete !== id_supprimer);
                 console.log(saveProduit);
 
             //On envoie la variable dans le localStorage
@@ -113,63 +114,70 @@ function validationFormulaire() {
             var valid = true;
             valid &= input.reportValidity();
             if(!valid){
-                break;            
+                break;                            
             }
         }
-        
-        // Récupération des données du formulaire à envoyer
-        let firstName = document.querySelector('#prenom').value
-        let lastName = document.querySelector('#nom').value
-        let address = document.querySelector('#adresse').value
-        let city = document.querySelector('#ville').value
-        let email = document.querySelector('#email').value
-
-        // Création d'un objet où l'on va stocker les champs requis à envoyer
-        let contact = 
-        {
-            'firstName': firstName,
-            'lastName': lastName,
-            'address': address,
-            'city': city,
-            'email': email,
-        }
-        console.log(contact);
-
-        // Récupération des éléments du localStorage
-        let produitPanier = localStorage.getItem('produit');
-        let monPanier = JSON.parse(produitPanier);
-
-        // Création d'un tableau dans lequel on va stocker tous les id récupérés dans le panier
-        let products = []
-
-        for (let i = 0; i < monPanier.length; i++){
-            // Variable dans laquelle on va récupérer les id du panier pour ensuite les intégrer dans le tableau
-            let listId = monPanier[i]
-            products.push(listId._id)
-        }
-        console.log(products);
-
-        // Objet dans lequel on stocke les éléments à envoyer au serveur
-        let body = {contact, products}
-        console.log(body);
-
-        //Envoi de l'objet au serveur
-        let envoi = fetch ('http://localhost:3000/api/cameras/order', {
-            method: 'POST',
-            body: JSON.stringify (body),
-            headers: {
-                'content-Type': 'application/json'
-            },
-                
-            })
-        .then((res) => {
-            if (res.ok) {
-                return res.json()                    
-            }
-            console.log(res);
-        })      
-       
+        if (valid){
+            requetePost();
+        }else{
+            alert ('Veuillez bien saisir le formulaire')
+        }      
     });
+}
+
+function requetePost(){        
+    // Récupération des données du formulaire à envoyer
+    let firstName = document.querySelector('#prenom').value
+    let lastName = document.querySelector('#nom').value
+    let address = document.querySelector('#adresse').value
+    let city = document.querySelector('#ville').value
+    let email = document.querySelector('#email').value
+
+    // Création d'un objet où l'on va stocker les champs requis à envoyer
+    let contact = 
+    {
+        'firstName': firstName,
+        'lastName': lastName,
+        'address': address,
+        'city': city,
+        'email': email,
+    }
+    console.log(contact);
+
+    // Récupération des éléments du localStorage
+    let produitPanier = localStorage.getItem('produit');
+    let monPanier = JSON.parse(produitPanier);
+    console.log(monPanier);
+
+    // Création d'un tableau dans lequel on va stocker tous les id récupérés dans le panier
+    let products = []
+
+    for (let i = 0; i < monPanier.length; i++){
+        // Variable dans laquelle on va récupérer les id du panier pour ensuite les intégrer dans le tableau
+        let listId = monPanier[i]
+        products.push(listId._id)
+    }
+    console.log(products);
+
+    // Objet dans lequel on stocke les éléments à envoyer au serveur
+    let body = {contact, products}
+    console.log(body);
+
+    //Envoi de l'objet au serveur
+    let envoi = fetch ('http://localhost:3000/api/cameras/order', {
+        method: 'POST',
+        body: JSON.stringify (body),
+        headers: {
+            'content-Type': 'application/json'
+        },
+            
+    })
+    .then((res) => {
+        if (res.ok) {
+            return res.json()             
+        }
+    })    
+    .then((json)=>console.log(json));
 }
 
 

@@ -80,5 +80,14 @@
         textarea{
             width: 50%;
         }
+        button{
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: gray;
+            font-family: 'Raleway', sans-serif;
+            border: none;
+            margin: 20px 0 20px 0;
+        }
     }
 }
