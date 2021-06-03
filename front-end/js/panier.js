@@ -11,64 +11,70 @@ affichagePrixTotal();
 supprimerProduit();
 validationFormulaire();
 
-// if (validationFormulaire()) {
-//     requetePost()
-// }else {
-//     alert ('Veuillez bien saisir le formulaire')
-// }
-
 
 //Fonction avec laquelle j'affiche le panier
 function affichagePanier (){
     if (saveProduit == null || saveProduit == 0){
-    // const element = document.createElement('p')
-    // document.getElementById('panier').appendChild(panierVide)
+    
     panier.innerHTML = "Votre panier est vide"
     }else{
 
         for(i = 0; i < saveProduit.length; i++ ){
-        //Séléction de la balise template HTML à clôner + clônage
-        document.getElementById('templatePanier');
-        cloneElt = document.importNode(templatePanier.content, true);
 
-        //Injection des éléments de chaque produit dans une balise HTML grâce à son id 
-        cloneElt.getElementById('produit').innerHTML = saveProduit[i].name
-        cloneElt.getElementById('Option').innerHTML = saveProduit[i].option_produit
-        cloneElt.getElementById('prix').innerHTML = saveProduit[i].price / 100 + ',' + '00' + '€'
+            //Séléction de la balise template HTML à clôner + clônage
+            document.getElementById('templatePanier');
+            cloneElt = document.importNode(templatePanier.content, true);
 
-        //En fonction du nombre d'articles on va crée un enfant pour chaque élément clôné
-        document.getElementById('tableau').appendChild(cloneElt)
+            //Injection des éléments de chaque produit dans une balise HTML grâce à son id 
+            cloneElt.getElementById('produit').innerHTML = saveProduit[i].name
+            cloneElt.getElementById('Option').innerHTML = saveProduit[i].option_produit
+            cloneElt.getElementById('prix').innerHTML = saveProduit[i].price / 100 + ',' + '00' + '€'
+
+            //En fonction du nombre d'articles on va crée un enfant pour chaque élément clôné
+            document.getElementById('tableau').appendChild(cloneElt)
         }
     }
     
 }
 
 
-function affichagePrixTotal(){
+affichagePrixTotal(calculPrixTotal());
+calculPrixTotal();
+
+function calculPrixTotal() {
+    
     //Déclaration de la variable qui va regrouper les prix inclus dans le panier
     let prixTotal = [];
-
+    
     //Aller chercher les prix dans le panier
     for (i = 0; i < saveProduit.length; i++){
         let prixProduitPanier = saveProduit[i].price / 100;    
-
+        
         //Mettre prix total dans la variable prixTotal
         prixTotal.push(prixProduitPanier);
     }
-
+    
     //Additionner les prix qui sont dans la variable prixTotal avec la méthode reduce
     const reducer = (accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue);
     let calculPrix = prixTotal.reduce(reducer, 0);
+    
+    // Ajout du prix dans le local storage
+    localStorage.setItem('calculPrix', JSON.stringify(calculPrix));
+
+    return calculPrix;   
+}
+
+function affichagePrixTotal(calculPrix) {
+    //Séléction de la balise dans laquelle on va injecter le code    
+    let prix_total = document.querySelector('.prix_total')
 
     //Le code HTML du prix total à afficher
-    const affichagePrix = `
-        <div class="prix_total">                        
+    const affichagePrix = `                                
             <p id="text_total">Total :</p>
-            <div id="total">${calculPrix},00 €</div>
-        </div>               
+            <div id="total">${calculPrix},00 €</div>                      
     `
     if(saveProduit.length !== 0)
-        panier.insertAdjacentHTML('beforeend', affichagePrix);
+        prix_total.innerHTML = affichagePrix;
         console.log(saveProduit);
 }
 
@@ -109,7 +115,7 @@ function supprimerProduit(){
 
 function validationFormulaire() {
 
-        document.querySelector('.form button').addEventListener('click', function(){
+    document.querySelector('.form button').addEventListener('click', function(){
         for (let input of document.querySelectorAll('.form input,.form textarea')) {
             var valid = true;
             valid &= input.reportValidity();
@@ -125,7 +131,11 @@ function validationFormulaire() {
     });
 }
 
-function requetePost(){        
+function recuperationFormulaire() {
+
+}
+
+function requetePost(){   
     // Récupération des données du formulaire à envoyer
     let firstName = document.querySelector('#prenom').value
     let lastName = document.querySelector('#nom').value
@@ -147,6 +157,7 @@ function requetePost(){
     // Récupération des éléments du localStorage
     let produitPanier = localStorage.getItem('produit');
     let monPanier = JSON.parse(produitPanier);
+
     console.log(monPanier);
 
     // Création d'un tableau dans lequel on va stocker tous les id récupérés dans le panier
@@ -177,8 +188,23 @@ function requetePost(){
             return res.json()             
         }
     })    
-    .then((json)=>console.log(json));
+    .then((json) => {
+
+        const contenu = json;
+        console.log(contenu.orderId);
+
+        // Mettre le id dans le localStorage
+        localStorage.setItem ('responseId', contenu.orderId);
+
+        // Aller vers la page confirmation
+
+        document.location.href=`confirmation.html?${contenu.orderId}`; 
+    }).catch((error) => {
+        
+        console.log('Erreur de requête')
+    });
 }
+
 
 
 

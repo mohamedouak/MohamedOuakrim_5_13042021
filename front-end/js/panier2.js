@@ -55,7 +55,7 @@ function affichagePrixTotal(){
         //Mettre prix total dans la variable prixTotal
         prixTotal.push(prixProduitPanier);
     }
-
+    console.log(prixTotal);
     //Additionner les prix qui sont dans la variable prixTotal avec la méthode reduce
     const reducer = (accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue);
     let calculPrix = prixTotal.reduce(reducer, 0);
