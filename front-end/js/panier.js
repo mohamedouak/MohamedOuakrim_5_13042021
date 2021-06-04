@@ -7,7 +7,8 @@ let tableau = document.getElementById('tableau');
 
 
 affichagePanier();
-affichagePrixTotal();
+calculPrixTotal();
+affichagePrixTotal(calculPrixTotal());
 supprimerProduit();
 validationFormulaire();
 
@@ -36,10 +37,6 @@ function affichagePanier (){
     }
     
 }
-
-
-affichagePrixTotal(calculPrixTotal());
-calculPrixTotal();
 
 function calculPrixTotal() {
     

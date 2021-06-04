@@ -14,18 +14,8 @@ function recuperationArticles() {
     })
     .then((articles) => {
        
-        //On fait une boucle pour pouvoir afficher chaque article qui sont stockés dans la variable articles
-        for (article of articles){
-                document.getElementById('templateArticle');
-                cloneElt = document.importNode(templateArticle.content, true);
-                
-                cloneElt.getElementById('name').innerHTML = article.name
-                cloneElt.getElementById('price').innerHTML = article.price / 100 + "," + "00" + "€"
-                cloneElt.getElementById('image').src = article.imageUrl
-                cloneElt.getElementById('description').innerHTML = article.description
-                cloneElt.getElementById('mainArticle').href = `produit.html?${article._id}`
-                document.getElementById('articles').appendChild(cloneElt)              
-        }        
+        affichageArticles(articles);              
+               
     })
     .catch((error) => {
         // Affichage d'un message sur la page 
@@ -34,5 +24,17 @@ function recuperationArticles() {
     });
 }
 
-
-    
+function affichageArticles(articles) {
+    //On fait une boucle pour pouvoir afficher chaque article qui sont stockés dans la variable articles
+    for (article of articles){
+        document.getElementById('templateArticle');
+        cloneElt = document.importNode(templateArticle.content, true);
+        
+        cloneElt.getElementById('name').innerHTML = article.name
+        cloneElt.getElementById('price').innerHTML = article.price / 100 + "," + "00" + "€"
+        cloneElt.getElementById('image').src = article.imageUrl
+        cloneElt.getElementById('description').innerHTML = article.description
+        cloneElt.getElementById('mainArticle').href = `produit.html?${article._id}`
+        document.getElementById('articles').appendChild(cloneElt)
+    }    
+}
