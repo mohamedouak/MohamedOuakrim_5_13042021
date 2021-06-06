@@ -68,7 +68,7 @@ function affichagePrixTotal(calculPrix) {
     //Le code HTML du prix total à afficher
     const affichagePrix = `                                
             <p id="text_total">Total :</p>
-            <div id="total">${calculPrix},00 €</div>                      
+            <div id="total">${calculPrix},00 €</div>                     
     `
     if(saveProduit.length !== 0)
         prix_total.innerHTML = affichagePrix;
@@ -105,8 +105,7 @@ function supprimerProduit(){
         })
         
     }
-}
-
+} 
 
 //------------------Formulaire de validation-------------------
 
@@ -121,18 +120,17 @@ function validationFormulaire() {
             }
         }
         if (valid){
-            requetePost();
+            requetePost(getDatas());
         }else{
             alert ('Veuillez bien saisir le formulaire')
         }      
     });
 }
 
-function recuperationFormulaire() {
+getDatas();
 
-}
+function getDatas() {
 
-function requetePost(){   
     // Récupération des données du formulaire à envoyer
     let firstName = document.querySelector('#prenom').value
     let lastName = document.querySelector('#nom').value
@@ -148,28 +146,40 @@ function requetePost(){
         'address': address,
         'city': city,
         'email': email,
-    }
+    }    
     console.log(contact);
 
     // Récupération des éléments du localStorage
     let produitPanier = localStorage.getItem('produit');
-    let monPanier = JSON.parse(produitPanier);
+    let monPanier = JSON.parse(produitPanier);    
 
-    console.log(monPanier);
+     // Création d'un tableau dans lequel on va stocker tous les id récupérés dans le panier
+     let products = []
 
-    // Création d'un tableau dans lequel on va stocker tous les id récupérés dans le panier
-    let products = []
+     for (let i = 0; i < monPanier.length; i++){
+         // Variable dans laquelle on va récupérer les id du panier pour ensuite les intégrer dans le tableau
+         let listId = monPanier[i]
+         products.push(listId._id)
+     }
+     console.log(products);
+ 
+     // Objet dans lequel on stocke les éléments à envoyer au serveur
+     let body = {contact, products}
+     console.log(body);
 
-    for (let i = 0; i < monPanier.length; i++){
-        // Variable dans laquelle on va récupérer les id du panier pour ensuite les intégrer dans le tableau
-        let listId = monPanier[i]
-        products.push(listId._id)
+     // Séléction de la classe où je vais injecter mon HTML
+    let formulaire = document.getElementById('formulaire')
+
+    // Masquer le formulaire si panier = 0
+    if (monPanier.length == null || monPanier.length == 0){
+    
+        formulaire.innerHTML = ""
     }
-    console.log(products);
 
-    // Objet dans lequel on stocke les éléments à envoyer au serveur
-    let body = {contact, products}
-    console.log(body);
+     return body     
+}
+     
+function requetePost(body){       
 
     //Envoi de l'objet au serveur
     let envoi = fetch ('http://localhost:3000/api/cameras/order', {
@@ -194,8 +204,8 @@ function requetePost(){
         localStorage.setItem ('responseId', contenu.orderId);
 
         // Aller vers la page confirmation
+        document.location.href=`confirmation.html?${contenu.orderId}`;
 
-        document.location.href=`confirmation.html?${contenu.orderId}`; 
     }).catch((error) => {
         
         console.log('Erreur de requête')

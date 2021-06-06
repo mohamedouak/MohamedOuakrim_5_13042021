@@ -1,11 +1,13 @@
 //Séléction de la section 'article' dans laquelle je vais injecter mon HTML
 let article = document.getElementById("article");
 
+//On va chercher l'id du produit en question 
 const idProduit = window.location.search;
+console.log(idProduit);
 
-const urlParams = new URLSearchParams(idProduit);
-
+//On supprime le point d'interrogation avec la méthode slice
 const leId = idProduit.slice(1);
+console.log(leId);
 
 recuperationArticle()
 
@@ -32,31 +34,27 @@ function recuperationArticle() {
         // Si les articles n'ont pas été récupérés
         console.log("Erreur de recuperation");
       });
-}  
-
-/**
- * Fonction pour afficher chaque produit séléctionné depuis la page index dans la page produit
- * @param {object} article - Objet produit
- */
+} 
 
 function affichageProduit(article) {
+
   //Séléction de la balise template HTML à clôner + clônage
   document.getElementById("templateProduit");
   cloneElt = document.importNode(templateProduit.content, true);
 
   //Injection des éléments de chaque produit dans une balise HTML grâce à l'id
   cloneElt.getElementById("name_produit").innerHTML = article.name;
-  cloneElt.getElementById("price_produit").innerHTML =
-    article.price / 100 + "," + "00" + "€";
+  cloneElt.getElementById("price_produit").innerHTML = article.price / 100 + "," + "00" + "€";
   cloneElt.getElementById("image_produit").src = article.imageUrl;
-  cloneElt.getElementById("description_produit").innerHTML =
-    article.description;
+  cloneElt.getElementById("description_produit").innerHTML = article.description;
+    
 
   // Création d'une variable dans lequel sont stockées les options
   let choice = cloneElt.getElementById("option_produit");
 
   // On fait une boucle sur le tableau des options
   article.lenses.forEach(function (lense) {
+
     //Variable option dans lequel on va créer une balise HTML option
     let option = document.createElement("option");
 
@@ -74,6 +72,7 @@ function affichageProduit(article) {
 
 //Création fonction pour ajouter l'article dans le panier et localStorage lors du click
 function ajoutPanier(article) {
+
   //Séléction de l'id du produit
   const idSelect = document.getElementById("option_produit");
 
@@ -108,9 +107,11 @@ function ajoutPanier(article) {
 
     //Fonction ajout produit séléctionné dans le localStorage
     function ajoutProduitLocalStorage() {
+      
       saveProduit.push(valeurProduit);
       localStorage.setItem("produit", JSON.stringify(saveProduit));
     }
+    
     //S'il y'a un produit dans le localstorage éxécuter... sinon éxécuter...
     if (saveProduit) {
       ajoutProduitLocalStorage();
@@ -124,3 +125,4 @@ function ajoutPanier(article) {
     }
   });
 }
+

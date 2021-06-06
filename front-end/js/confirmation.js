@@ -14,9 +14,9 @@ function affichagePageConfirmation(){
 let structureConfirmation = document.querySelector("#recapitulatif");
 
 let injectionHtml = `
-<p>Nous vous remercions pour votre commande</p>
-<p>Total de votre commande : ${prixTotal},00 €</p>
-<p>Votre numéro de votre commande : ${responseId} a bien été pris en compte</p>
+<p>Votre commande d'un montant de ${prixTotal},00 € a bien été prise en compte</p>
+<p>Numéro de votre commande : ${responseId}</p>
+<p>Nous vous remercions pour votre visite</p>
 <p>A bientôt sur Orinoco</p>
 `;
 

@@ -9,6 +9,10 @@ header{
     padding: 0 10px 0 10px;
     a{
         width: 25%;
+        @media screen and (max-width:768px){
+            width: 40%;
+            padding: 15px 0 15px 0;
+        }
         .logo{
             width: 100%;
             object-fit: cover;
@@ -25,12 +29,16 @@ header{
     }
 }
 .container{
-    background-color: #f3e9f0;
+    
+    
     #articles{
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
         padding-bottom: 40px;
+        @media screen and (max-width:768px){
+            display: block;
+        }
         #mainArticle{
             width: 35%;
             text-decoration-line: none;
@@ -64,7 +72,7 @@ header{
 }
 footer{
     background-color: #f3e9f0;
-    padding: 50px 10px 100px 10px;
+    padding: 20px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
