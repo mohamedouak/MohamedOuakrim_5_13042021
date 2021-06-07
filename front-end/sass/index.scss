@@ -1,5 +1,8 @@
 body{
     margin: 0;
+    @media screen and (max-width:768px){
+        font-size: 0.9em;
+    }
 }
 header{
     display: flex;
@@ -86,16 +89,12 @@ footer{
                 text-decoration-line: none;
                 font-size: 1.3em;
                 font-family: 'Raleway', sans-serif;
-                color: black;
+                color: black;                
                 &:hover{
                     color: palevioletred;
                     font-weight: bold;
                 }
             }
         }
-    }
-    i{
-        font-size: 1em;
-        padding-right: 5px;
     }
 }

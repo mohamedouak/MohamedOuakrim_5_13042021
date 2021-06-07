@@ -1,4 +1,6 @@
+//Séléction de la classe où on va injecter le code HTML
 let articles = document.getElementById('articles');
+
 
 //On fait appel à la fonction déclarée plus haut pour afficher tous les articles    
 recuperationArticles();
@@ -27,6 +29,8 @@ function recuperationArticles() {
 function affichageArticles(articles) {
     //On fait une boucle pour pouvoir afficher chaque article qui sont stockés dans la variable articles
     for (article of articles){
+
+        //A l'aide des template HTML on va afficher les articles dans les différentes classes en procédant par clônage avec du code JS
         document.getElementById('templateArticle');
         cloneElt = document.importNode(templateArticle.content, true);
         

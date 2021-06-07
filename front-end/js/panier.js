@@ -11,7 +11,7 @@ calculPrixTotal();
 affichagePrixTotal(calculPrixTotal());
 supprimerProduit();
 validationFormulaire();
-
+getDatas();
 
 //Fonction avec laquelle j'affiche le panier
 function affichagePanier (){
@@ -126,8 +126,6 @@ function validationFormulaire() {
         }      
     });
 }
-
-getDatas();
 
 function getDatas() {
 

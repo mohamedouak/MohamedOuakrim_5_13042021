@@ -5,7 +5,7 @@ let article = document.getElementById("article");
 const idProduit = window.location.search;
 console.log(idProduit);
 
-//On supprime le point d'interrogation avec la méthode slice
+//On supprime le point d'interrogation de l'url avec la méthode slice
 const leId = idProduit.slice(1);
 console.log(leId);
 
