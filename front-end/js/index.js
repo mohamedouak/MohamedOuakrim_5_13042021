@@ -1,7 +1,6 @@
 //Séléction de la classe où on va injecter le code HTML
 let articles = document.getElementById('articles');
 
-
 //On fait appel à la fonction déclarée plus haut pour afficher tous les articles    
 recuperationArticles();
 
@@ -22,7 +21,7 @@ function recuperationArticles() {
     .catch((error) => {
         // Affichage d'un message sur la page 
         // Si les articles n'ont pas été récupérés
-        console.log('Erreur de recuperation')
+        alert('Erreur de recuperation')
     });
 }
 

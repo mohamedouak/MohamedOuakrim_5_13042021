@@ -1,5 +1,4 @@
 let saveProduit = JSON.parse(localStorage.getItem('produit'));
-console.log(saveProduit);
 
 //Séléction de la classe où je vais injecter mon HTML
 let panier = document.getElementById('panier');
@@ -11,7 +10,7 @@ calculPrixTotal();
 affichagePrixTotal(calculPrixTotal());
 supprimerProduit();
 validationFormulaire();
-getDatas();
+
 
 //Fonction avec laquelle j'affiche le panier
 function affichagePanier (){
@@ -72,7 +71,6 @@ function affichagePrixTotal(calculPrix) {
     `
     if(saveProduit.length !== 0)
         prix_total.innerHTML = affichagePrix;
-        console.log(saveProduit);
 }
 
 
@@ -80,7 +78,6 @@ function affichagePrixTotal(calculPrix) {
 function supprimerProduit(){
     //Séléction des références de tous les btn-delete
     let btn = document.querySelectorAll('.btn-delete')
-    console.log(btn);
 
     //On fait une boucle for pour chaque élément du panier à supprimer
     for(let i = 0; i < saveProduit.length; i++){
@@ -89,11 +86,9 @@ function supprimerProduit(){
 
             //Séléction de l'id du produit qui va être supprimé en cliquant sur le bouton
             let id_supprimer = saveProduit[i].idDelete;
-            console.log(id_supprimer);
 
             //Avec la méthode filter je séléctionne les éléments à garder et je supprime l'élément où le btn-delete a été cliqué
             saveProduit = saveProduit.filter( el => el.idDelete !== id_supprimer);
-                console.log(saveProduit);
 
             //On envoie la variable dans le localStorage
             localStorage.setItem(
@@ -102,8 +97,7 @@ function supprimerProduit(){
             // alert('Ce produit a été supprimé du panier')
             alert('Ce produit a été supprimé')
             window.location.href = 'panier.html';
-        })
-        
+        });        
     }
 } 
 
@@ -127,6 +121,8 @@ function validationFormulaire() {
     });
 }
 
+getDatas();
+
 function getDatas() {
 
     // Récupération des données du formulaire à envoyer
@@ -144,8 +140,7 @@ function getDatas() {
         'address': address,
         'city': city,
         'email': email,
-    }    
-    console.log(contact);
+    }
 
     // Récupération des éléments du localStorage
     let produitPanier = localStorage.getItem('produit');
@@ -159,11 +154,9 @@ function getDatas() {
          let listId = monPanier[i]
          products.push(listId._id)
      }
-     console.log(products);
  
      // Objet dans lequel on stocke les éléments à envoyer au serveur
      let body = {contact, products}
-     console.log(body);
 
      // Séléction de la classe où je vais injecter mon HTML
     let formulaire = document.getElementById('formulaire')
@@ -196,7 +189,6 @@ function requetePost(body){
     .then((json) => {
 
         const contenu = json;
-        console.log(contenu.orderId);
 
         // Mettre le id dans le localStorage
         localStorage.setItem ('responseId', contenu.orderId);
@@ -206,7 +198,7 @@ function requetePost(body){
 
     }).catch((error) => {
         
-        console.log('Erreur de requête')
+        alert('Erreur de requête');
     });
 }
 

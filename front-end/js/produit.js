@@ -3,11 +3,9 @@ let article = document.getElementById("article");
 
 //On va chercher l'id du produit en question 
 const idProduit = window.location.search;
-console.log(idProduit);
 
 //On supprime le point d'interrogation de l'url avec la méthode slice
 const leId = idProduit.slice(1);
-console.log(leId);
 
 recuperationArticle()
 
@@ -32,7 +30,7 @@ function recuperationArticle() {
       .catch((error) => {
         // Affichage d'un message sur la page
         // Si les articles n'ont pas été récupérés
-        console.log("Erreur de recuperation");
+        alert("Erreur de recuperation");
       });
 } 
 
@@ -78,15 +76,12 @@ function ajoutPanier(article) {
 
   //Séléction du bouton
   let selectButton = document.getElementById("btn_add");
-  console.log(selectButton);
-
   //Ecouter le bouton et envoyer panier
   selectButton.addEventListener("click", (event) => {
     event.preventDefault();
 
     //Choix de l'utilisateur dans une variable
     let userChoice = idSelect.value;
-    console.log(userChoice);
 
     //Récupération des valeurs du produit
     let valeurProduit = {
@@ -99,11 +94,9 @@ function ajoutPanier(article) {
       price: article.price,
       quantite: 1,
     };
-    console.log(valeurProduit);
 
     // Variable dans laquelle sont stockées la value et la key qui sont dans le localstorage
     let saveProduit = JSON.parse(localStorage.getItem("produit"));
-    console.log(saveProduit);
 
     //Fonction ajout produit séléctionné dans le localStorage
     function ajoutProduitLocalStorage() {
@@ -115,13 +108,9 @@ function ajoutPanier(article) {
     //S'il y'a un produit dans le localstorage éxécuter... sinon éxécuter...
     if (saveProduit) {
       ajoutProduitLocalStorage();
-
-      console.log(saveProduit);
-    } else {
+    }else{
       saveProduit = [];
       ajoutProduitLocalStorage();
-
-      console.log(saveProduit);
     }
   });
 }
