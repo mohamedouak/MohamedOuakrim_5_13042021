@@ -1,7 +1,7 @@
 let saveProduit = JSON.parse(localStorage.getItem('produit'));
 
 //Séléction de la classe où je vais injecter mon HTML
-let panier = document.getElementById('panier');
+let panier = document.getElementById('panier-vide');
 let tableau = document.getElementById('tableau');
 
 
@@ -28,6 +28,7 @@ function affichagePanier (){
             //Injection des éléments de chaque produit dans une balise HTML grâce à son id 
             cloneElt.getElementById('produit').innerHTML = saveProduit[i].name
             cloneElt.getElementById('Option').innerHTML = saveProduit[i].option_produit
+            cloneElt.getElementById('quantite').innerHTML = saveProduit[i].quantite
             cloneElt.getElementById('prix').innerHTML = saveProduit[i].price / 100 + ',' + '00' + '€'
 
             //En fonction du nombre d'articles on va crée un enfant pour chaque élément clôné
@@ -44,7 +45,7 @@ function calculPrixTotal() {
     
     //Aller chercher les prix dans le panier
     for (i = 0; i < saveProduit.length; i++){
-        let prixProduitPanier = saveProduit[i].price / 100;    
+        let prixProduitPanier = saveProduit[i].price * saveProduit[i].quantite / 100;    
         
         //Mettre prix total dans la variable prixTotal
         prixTotal.push(prixProduitPanier);
@@ -57,7 +58,7 @@ function calculPrixTotal() {
     // Ajout du prix dans le local storage
     localStorage.setItem('calculPrix', JSON.stringify(calculPrix));
 
-    return calculPrix;   
+    return calculPrix;  
 }
 
 function affichagePrixTotal(calculPrix) {
@@ -94,8 +95,8 @@ function supprimerProduit(){
             localStorage.setItem(
                 'produit', JSON.stringify(saveProduit)
                 );
-            // alert('Ce produit a été supprimé du panier')
-            alert('Ce produit a été supprimé')
+            // Message informant de la suppression
+            alert('Cet article a bien été supprimé')
             window.location.href = 'panier.html';
         });        
     }
@@ -171,13 +172,12 @@ function getDatas() {
 function requetePost(body){       
 
     //Envoi de l'objet au serveur
-    let envoi = fetch ('http://localhost:3000/api/cameras/order', {
+    const envoi = fetch ('http://localhost:3000/api/cameras/order', {
         method: 'POST',
         body: JSON.stringify (body),
         headers: {
             'content-Type': 'application/json'
-        },
-            
+        },            
     })
     .then((res) => {
         if (res.ok) {
@@ -187,6 +187,7 @@ function requetePost(body){
     .then((json) => {
 
         const contenu = json;
+        console.log(contenu);
 
         // Mettre le id dans le localStorage
         localStorage.setItem ('responseId', contenu.orderId);
@@ -196,7 +197,7 @@ function requetePost(body){
 
     }).catch((error) => {
         
-        alert('Erreur de requête');
+        console.log("Il y a une erreur :" + error.stack);
     });
 }
 

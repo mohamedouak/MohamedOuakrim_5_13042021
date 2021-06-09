@@ -74,27 +74,13 @@ header{
     }
 }
 footer{
-    background-color: #f3e9f0;
-    padding: 20px 0;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    ul{
-        width: 60%;
-        display: flex;
-        justify-content: space-between;
-        li{
-            list-style-type: none;
-            a{
-                text-decoration-line: none;
-                font-size: 1.3em;
-                font-family: 'Raleway', sans-serif;
-                color: black;                
-                &:hover{
-                    color: palevioletred;
-                    font-weight: bold;
-                }
-            }
+    justify-content: center;
+    background-color: #f3e9f0;
+    img{
+        width: 25%;
+        @media screen and (max-width:768px){
+            width: 40%;
         }
     }
 }

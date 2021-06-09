@@ -79,29 +79,17 @@ header nav a {
 }
 
 footer {
+  display: flex;
+  justify-content: center;
   background-color: #f3e9f0;
-  padding: 20px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
-footer ul {
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
+footer img {
+  width: 25%;
 }
-footer ul li {
-  list-style-type: none;
-}
-footer ul li a {
-  text-decoration-line: none;
-  font-size: 1.3em;
-  font-family: "Raleway", sans-serif;
-  color: black;
-}
-footer ul li a:hover {
-  color: palevioletred;
-  font-weight: bold;
+@media screen and (max-width: 768px) {
+  footer img {
+    width: 40%;
+  }
 }
 
 body {
@@ -114,12 +102,28 @@ body {
   padding-top: 80px;
   background-color: white;
 }
+@media screen and (max-width: 768px) {
+  #article {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 #article .image {
   width: 70%;
+}
+@media screen and (max-width: 768px) {
+  #article .image {
+    width: 90%;
+  }
 }
 #article .image #image_produit {
   width: 100%;
   border-radius: 0 20px 20px 0;
+}
+@media screen and (max-width: 768px) {
+  #article .image #image_produit {
+    border-radius: 20px;
+  }
 }
 #article .description {
   padding: 20px;
@@ -152,38 +156,8 @@ body {
   margin-top: 30px;
 }
 
-footer {
-  background-color: #f3e9f0;
-  padding: 20px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-footer ul {
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
-}
-footer ul li {
-  list-style-type: none;
-}
-footer ul li a {
-  text-decoration-line: none;
-  font-size: 1.3em;
-  font-family: "Raleway", sans-serif;
-  color: black;
-}
-footer ul li a:hover {
-  color: palevioletred;
-  font-weight: bold;
-}
-footer i {
-  font-size: 1em;
-  padding-right: 5px;
-}
-
 #titre_panier {
-  font-family: "Orelega One", sans-serif;
+  font-family: "Raleway", sans-serif;
   text-align: center;
 }
 
@@ -192,6 +166,12 @@ footer i {
   margin: auto;
   padding-top: 40px;
   font-family: "Raleway", sans-serif;
+  font-size: 1.5em;
+}
+@media screen and (max-width: 768px) {
+  #panier {
+    font-size: 1.2em;
+  }
 }
 #panier h1 {
   font-family: "Orelega One", sans-serif;
@@ -211,7 +191,7 @@ footer i {
   width: 20%;
   text-align: center;
   background-color: #f3e9f0;
-  font-size: 1.3em;
+  font-size: 1em;
 }
 #panier .prix_total {
   width: 100%;
@@ -233,15 +213,23 @@ footer i {
   font-weight: bold;
   padding: 80px;
 }
+@media screen and (max-width: 768px) {
+  .panier-vide {
+    padding: 0;
+  }
+}
 
 #formulaire {
   width: 80%;
   margin: auto;
   font-family: "Raleway", sans-serif;
   background-color: #f3e9f0;
+  border-radius: 20px;
+  margin-bottom: 40px;
 }
 #formulaire h2 {
   text-align: center;
+  padding: 40px 0;
 }
 #formulaire form {
   width: 50%;
@@ -255,11 +243,21 @@ footer i {
   width: 50%;
   margin: 10px 0 10px 0;
 }
+@media screen and (max-width: 768px) {
+  #formulaire form input {
+    width: 100%;
+  }
+}
 #formulaire form label {
   width: 50%;
 }
 #formulaire form textarea {
   width: 50%;
+}
+@media screen and (max-width: 768px) {
+  #formulaire form textarea {
+    width: 100%;
+  }
 }
 #formulaire form button {
   cursor: pointer;

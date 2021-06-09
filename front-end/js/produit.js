@@ -1,5 +1,5 @@
 //Séléction de la section 'article' dans laquelle je vais injecter mon HTML
-let article = document.getElementById("article");
+let article = document.getElementById('article');
 
 //On va chercher l'id du produit en question 
 const idProduit = window.location.search;
@@ -7,10 +7,10 @@ const idProduit = window.location.search;
 //On supprime le point d'interrogation de l'url avec la méthode slice
 const leId = idProduit.slice(1);
 
-recuperationArticle()
+recuperationProduit()
 
 //Fonction par laquelle je vais récupérer chaque article avec son id
-function recuperationArticle() {
+function recuperationProduit() {
   return  fetch(`http://localhost:3000/api/cameras/${leId}`)
       // Si response de l'api on convertie la reponse en json
       .then((res) => {
@@ -30,34 +30,34 @@ function recuperationArticle() {
       .catch((error) => {
         // Affichage d'un message sur la page
         // Si les articles n'ont pas été récupérés
-        alert("Erreur de recuperation");
+        alert('Erreur de recuperation');
       });
 } 
 
 function affichageProduit(article) {
 
   //Séléction de la balise template HTML à clôner + clônage
-  document.getElementById("templateProduit");
+  document.getElementById('templateProduit');
   cloneElt = document.importNode(templateProduit.content, true);
 
   //Injection des éléments de chaque produit dans une balise HTML grâce à l'id
-  cloneElt.getElementById("name_produit").innerHTML = article.name;
-  cloneElt.getElementById("price_produit").innerHTML = article.price / 100 + "," + "00" + "€";
-  cloneElt.getElementById("image_produit").src = article.imageUrl;
-  cloneElt.getElementById("description_produit").innerHTML = article.description;
+  cloneElt.getElementById('name_produit').innerHTML = article.name;
+  cloneElt.getElementById('price_produit').innerHTML = article.price / 100 + "," + "00" + "€";
+  cloneElt.getElementById('image_produit').src = article.imageUrl;
+  cloneElt.getElementById('description_produit').innerHTML = article.description;
     
 
   // Création d'une variable dans lequel sont stockées les options
-  let choice = cloneElt.getElementById("option_produit");
+  let choice = cloneElt.getElementById('option_produit');
 
   // On fait une boucle sur le tableau des options
   article.lenses.forEach(function (lense) {
 
     //Variable option dans lequel on va créer une balise HTML option
-    let option = document.createElement("option");
+    let option = document.createElement('option');
 
     //On injecte le texte dans la balise option
-    option.setAttribute("value", lense);
+    option.setAttribute('value', lense);
     option.textContent = lense;
 
     //Création d'une balise enfant option pour chaque option
@@ -65,24 +65,25 @@ function affichageProduit(article) {
   });
 
   //En fonction du nombre d'articles on va crée un enfant pour chaque élément clôné
-  document.getElementById("article").appendChild(cloneElt);
+  document.getElementById('article').appendChild(cloneElt);
 }
 
 //Création fonction pour ajouter l'article dans le panier et localStorage lors du click
 function ajoutPanier(article) {
 
-  //Séléction de l'id du produit
-  const idSelect = document.getElementById("option_produit");
+  //Séléction de la balise option produit
+  const idSelect = document.getElementById('option_produit');
 
   //Séléction du bouton
-  let selectButton = document.getElementById("btn_add");
+  let selectButton = document.getElementById('btn_add');
+
   //Ecouter le bouton et envoyer panier
-  selectButton.addEventListener("click", (event) => {
+  selectButton.addEventListener('click', (event) => {
     event.preventDefault();
 
     //Choix de l'utilisateur dans une variable
     let userChoice = idSelect.value;
-
+    
     //Récupération des valeurs du produit
     let valeurProduit = {
       lenses: article.lenses,
@@ -94,24 +95,67 @@ function ajoutPanier(article) {
       price: article.price,
       quantite: 1,
     };
-
-    // Variable dans laquelle sont stockées la value et la key qui sont dans le localstorage
-    let saveProduit = JSON.parse(localStorage.getItem("produit"));
-
-    //Fonction ajout produit séléctionné dans le localStorage
-    function ajoutProduitLocalStorage() {
-      
-      saveProduit.push(valeurProduit);
-      localStorage.setItem("produit", JSON.stringify(saveProduit));
-    }
     
-    //S'il y'a un produit dans le localstorage éxécuter... sinon éxécuter...
-    if (saveProduit) {
-      ajoutProduitLocalStorage();
-    }else{
-      saveProduit = [];
-      ajoutProduitLocalStorage();
-    }
+    // Controle si le panier existe dans le LS
+    let monPanier = localStorage.getItem('produit');
+
+    // Si le panier est null
+    if (localStorage.getItem('produit') == null) {
+      
+        // recuperer la valeur du tableau panierArray
+        let panierArray = [];
+
+        // ajouter un produit dans l'array
+        panierArray.push(valeurProduit);
+
+        // transformer objet en string
+        let panierArrayJSON = JSON.stringify(panierArray);
+
+        // mettre à jour le LS
+        localStorage.setItem('produit', panierArrayJSON);
+
+    //Si le panier existe    
+    }else{      
+
+      // Prende la valeur du panier LS et parse pour ajouter un nouveau produit
+      let parsedPanier = JSON.parse(localStorage.getItem('produit'));
+      console.log(parsedPanier);
+      
+      // On confirme qu'il n'y a pas ca
+      let flag = false; 
+
+      for (let elem of parsedPanier) {
+
+          // On verifie _id et l'option
+          if (elem._id == valeurProduit._id && elem.option_produit == valeurProduit.option_produit) {
+              elem.quantite++;
+
+              // si identique alors le flag devient true
+              flag = true;
+              
+              elem.totalprice = (elem.quantite * parseInt(elem.price))+' €';
+
+                // on actualise le panier
+              localStorage.setItem('produit', JSON.stringify(parsedPanier));
+          }
+      }
+      if (flag === false) {
+
+      // ajouter un produit dans l'array
+      parsedPanier.push(valeurProduit);
+
+      // mettre à jour le LS
+      localStorage.setItem('produit', JSON.stringify(parsedPanier));
+
+      alert('Article bien ajouté au panier');
+
+      }else{
+
+        alert('Article de nouveau ajouté au panier');
+
+      }
+    }    
   });
 }
+
 
