@@ -68,6 +68,9 @@ header{
                &:hover{
                    transform: scale(1.2);
                    transition: 0.5s;
+                   @media screen and (max-width:768px){
+                    transform: none;
+                }
                }
            }
        } 

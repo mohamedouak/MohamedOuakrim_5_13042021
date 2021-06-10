@@ -21,4 +21,4 @@ function affichagePageConfirmation(){
         `;
 
     structureConfirmation.insertAdjacentHTML("afterbegin", injectionHtml);
-}
+};

@@ -11,6 +11,7 @@
     font-family: 'Raleway', sans-serif;
     font-size: 1.5em;
     @media screen and (max-width:768px){
+        width: 95%;
         font-size: 1.2em;
     }
     h1{
@@ -68,6 +69,9 @@
     background-color: #f3e9f0;
     border-radius: 20px;
     margin-bottom: 40px;
+    @media screen and (max-width:768px){
+        width: 95%;
+    }
     h2{
         text-align: center;
         padding: 40px 0;

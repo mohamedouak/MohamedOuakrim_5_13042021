@@ -1,7 +1,7 @@
 let saveProduit = JSON.parse(localStorage.getItem('produit'));
 
 //Séléction de la classe où je vais injecter mon HTML
-let panier = document.getElementById('panier-vide');
+let panier = document.getElementById('panier');
 let tableau = document.getElementById('tableau');
 
 
@@ -26,17 +26,16 @@ function affichagePanier (){
             cloneElt = document.importNode(templatePanier.content, true);
 
             //Injection des éléments de chaque produit dans une balise HTML grâce à son id 
-            cloneElt.getElementById('produit').innerHTML = saveProduit[i].name
-            cloneElt.getElementById('Option').innerHTML = saveProduit[i].option_produit
-            cloneElt.getElementById('quantite').innerHTML = saveProduit[i].quantite
-            cloneElt.getElementById('prix').innerHTML = saveProduit[i].price / 100 + ',' + '00' + '€'
+            cloneElt.getElementById('produit').innerHTML = saveProduit[i].name;
+            cloneElt.getElementById('Option').innerHTML = saveProduit[i].option_produit;
+            cloneElt.getElementById('quantite').innerHTML = saveProduit[i].quantite;
+            cloneElt.getElementById('prix').innerHTML = saveProduit[i].price / 100 + ',' + '00' + '€';
 
             //En fonction du nombre d'articles on va crée un enfant pour chaque élément clôné
             document.getElementById('tableau').appendChild(cloneElt)
-        }
-    }
-    
-}
+        };
+    };    
+};
 
 function calculPrixTotal() {
     
@@ -49,19 +48,20 @@ function calculPrixTotal() {
         
         //Mettre prix total dans la variable prixTotal
         prixTotal.push(prixProduitPanier);
-    }
+    };
     
     //Additionner les prix qui sont dans la variable prixTotal avec la méthode reduce
     const reducer = (accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue);
     let calculPrix = prixTotal.reduce(reducer, 0);
-    
+
     // Ajout du prix dans le local storage
     localStorage.setItem('calculPrix', JSON.stringify(calculPrix));
 
     return calculPrix;  
-}
+};
 
 function affichagePrixTotal(calculPrix) {
+
     //Séléction de la balise dans laquelle on va injecter le code    
     let prix_total = document.querySelector('.prix_total')
 
@@ -72,7 +72,7 @@ function affichagePrixTotal(calculPrix) {
     `
     if(saveProduit.length !== 0)
         prix_total.innerHTML = affichagePrix;
-}
+};
 
 
 
@@ -92,44 +92,45 @@ function supprimerProduit(){
             saveProduit = saveProduit.filter( el => el.idDelete !== id_supprimer);
 
             //On envoie la variable dans le localStorage
-            localStorage.setItem(
-                'produit', JSON.stringify(saveProduit)
-                );
+            localStorage.setItem('produit', JSON.stringify(saveProduit));
+            
             // Message informant de la suppression
             alert('Cet article a bien été supprimé')
             window.location.href = 'panier.html';
         });        
-    }
-} 
+    };
+}; 
 
 //------------------Formulaire de validation-------------------
 
 function validationFormulaire() {
 
-    document.querySelector('.form button').addEventListener('click', function(){
+    document.querySelector('.form button').addEventListener('click', function(e){
+        e.preventDefault();
         for (let input of document.querySelectorAll('.form input,.form textarea')) {
             var valid = true;
             valid &= input.reportValidity();
             if(!valid){
                 break;                            
-            }
-        }
+            };
+        };
         if (valid){
             requetePost(getDatas());
         }else{
             alert ('Veuillez bien saisir le formulaire')
-        }      
+        };
+        console.log(valid);      
     });
-}
+};
 
 function getDatas() {
 
     // Récupération des données du formulaire à envoyer
-    let firstName = document.querySelector('#prenom').value
-    let lastName = document.querySelector('#nom').value
-    let address = document.querySelector('#adresse').value
-    let city = document.querySelector('#ville').value
-    let email = document.querySelector('#email').value
+    let firstName = document.querySelector('#prenom').value;
+    let lastName = document.querySelector('#nom').value;
+    let address = document.querySelector('#adresse').value;
+    let city = document.querySelector('#ville').value;
+    let email = document.querySelector('#email').value;
 
     // Création d'un objet où l'on va stocker les champs requis à envoyer
     let contact = 
@@ -139,35 +140,35 @@ function getDatas() {
         'address': address,
         'city': city,
         'email': email,
-    }
+    };
 
     // Récupération des éléments du localStorage
     let produitPanier = localStorage.getItem('produit');
-    let monPanier = JSON.parse(produitPanier);    
+    let lePanier = JSON.parse(produitPanier);    
 
      // Création d'un tableau dans lequel on va stocker tous les id récupérés dans le panier
-     let products = []
+     let products = [];
 
-     for (let i = 0; i < monPanier.length; i++){
+     for (let i = 0; i < lePanier.length; i++){
          // Variable dans laquelle on va récupérer les id du panier pour ensuite les intégrer dans le tableau
-         let listId = monPanier[i]
-         products.push(listId._id)
-     }
+         let listId = lePanier[i];
+         products.push(listId._id);
+     };
  
      // Objet dans lequel on stocke les éléments à envoyer au serveur
-     let body = {contact, products}
+     let body = {contact, products};
 
      // Séléction de la classe où je vais injecter mon HTML
-    let formulaire = document.getElementById('formulaire')
+    let formulaire = document.getElementById('formulaire');
 
     // Masquer le formulaire si panier = 0
-    if (monPanier.length == null || monPanier.length == 0){
+    if (lePanier.length == null || lePanier.length == 0){
     
         formulaire.innerHTML = ""
-    }
+    };
 
      return body     
-}
+};
      
 function requetePost(body){       
 
@@ -182,12 +183,11 @@ function requetePost(body){
     .then((res) => {
         if (res.ok) {
             return res.json()             
-        }
+        };
     })    
     .then((json) => {
 
         const contenu = json;
-        console.log(contenu);
 
         // Mettre le id dans le localStorage
         localStorage.setItem ('responseId', contenu.orderId);
@@ -195,12 +195,11 @@ function requetePost(body){
         // Aller vers la page confirmation
         document.location.href=`confirmation.html?${contenu.orderId}`;
 
-    }).catch((error) => {
+    }).catch(() => {
         
-        console.log("Il y a une erreur :" + error.stack);
+        alert('erreur de requête');
     });
-}
-
+};
 
 
 

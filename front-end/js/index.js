@@ -6,26 +6,33 @@ recuperationArticles();
 
 //On déclare une fonction pour récupérer tous les articles dans l'API
 function recuperationArticles() {
+
     return fetch ('http://localhost:3000/api/cameras')
+
     // Si response de l'api on convertie la reponse en json
     .then((res) => {
+
         if (res.ok) {
-            return res.json()
-        }
+
+            return res.json();
+
+        }      
     })
     .then((articles) => {
-       
+        
         affichageArticles(articles);              
                
     })
     .catch((error) => {
-        // Affichage d'un message sur la page 
-        // Si les articles n'ont pas été récupérés
-        alert('Erreur de recuperation')
+
+        // Affichage d'un message sur la page si les articles n'ont pas été récupérés        
+        alert('Erreur de recuperation');
+
     });
-}
+};
 
 function affichageArticles(articles) {
+
     //On fait une boucle pour pouvoir afficher chaque article qui sont stockés dans la variable articles
     for (article of articles){
 
@@ -33,11 +40,11 @@ function affichageArticles(articles) {
         document.getElementById('templateArticle');
         cloneElt = document.importNode(templateArticle.content, true);
         
-        cloneElt.getElementById('name').innerHTML = article.name
-        cloneElt.getElementById('price').innerHTML = article.price / 100 + "," + "00" + "€"
-        cloneElt.getElementById('image').src = article.imageUrl
-        cloneElt.getElementById('description').innerHTML = article.description
-        cloneElt.getElementById('mainArticle').href = `produit.html?${article._id}`
-        document.getElementById('articles').appendChild(cloneElt)
-    }    
-}
+        cloneElt.getElementById('name').innerHTML = article.name;
+        cloneElt.getElementById('price').innerHTML = article.price / 100 + "," + "00" + "€";
+        cloneElt.getElementById('image').src = article.imageUrl;
+        cloneElt.getElementById('description').innerHTML = article.description;
+        cloneElt.getElementById('mainArticle').href = `produit.html?${article._id}`;
+        document.getElementById('articles').appendChild(cloneElt);
+    };
+};

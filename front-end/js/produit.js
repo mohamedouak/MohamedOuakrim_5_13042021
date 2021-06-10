@@ -7,32 +7,34 @@ const idProduit = window.location.search;
 //On supprime le point d'interrogation de l'url avec la méthode slice
 const leId = idProduit.slice(1);
 
-recuperationProduit()
+recuperationProduit();
 
 //Fonction par laquelle je vais récupérer chaque article avec son id
 function recuperationProduit() {
+
   return  fetch(`http://localhost:3000/api/cameras/${leId}`)
+
       // Si response de l'api on convertie la reponse en json
       .then((res) => {
+
         if (res.ok) {
           return res.json();
-        }
+
+        };
       })
       .then((article) => {
-        // Affichage
-        affichageProduit(article);
-    
-        // bouton ajouter au panier
+        
+        affichageProduit(article);    
+        
         ajoutPanier(article);
     
-        // Affichage des données dans le code
       })
       .catch((error) => {
-        // Affichage d'un message sur la page
-        // Si les articles n'ont pas été récupérés
+        
         alert('Erreur de recuperation');
+
       });
-} 
+};
 
 function affichageProduit(article) {
 
@@ -66,7 +68,7 @@ function affichageProduit(article) {
 
   //En fonction du nombre d'articles on va crée un enfant pour chaque élément clôné
   document.getElementById('article').appendChild(cloneElt);
-}
+};
 
 //Création fonction pour ajouter l'article dans le panier et localStorage lors du click
 function ajoutPanier(article) {
@@ -119,14 +121,13 @@ function ajoutPanier(article) {
 
       // Prende la valeur du panier LS et parse pour ajouter un nouveau produit
       let parsedPanier = JSON.parse(localStorage.getItem('produit'));
-      console.log(parsedPanier);
       
       // On confirme qu'il n'y a pas ca
       let flag = false; 
 
       for (let elem of parsedPanier) {
 
-          // On verifie _id et l'option
+          // On verifie _id et l'option et on incrémente la quantité à chaque clic
           if (elem._id == valeurProduit._id && elem.option_produit == valeurProduit.option_produit) {
               elem.quantite++;
 
@@ -137,8 +138,8 @@ function ajoutPanier(article) {
 
                 // on actualise le panier
               localStorage.setItem('produit', JSON.stringify(parsedPanier));
-          }
-      }
+          };
+      };
       if (flag === false) {
 
       // ajouter un produit dans l'array
@@ -153,9 +154,9 @@ function ajoutPanier(article) {
 
         alert('Article de nouveau ajouté au panier');
 
-      }
-    }    
+      };
+    };    
   });
-}
+};
 
 
